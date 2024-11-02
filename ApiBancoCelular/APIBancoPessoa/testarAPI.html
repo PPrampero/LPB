@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Testa API NODE</title>
+    <script type="text/javascript">
+
+        var local = "http://localhost:3000/pessoa";
+
+        var registro = {
+            codigo: "1",
+            nome: "Prampero",
+            idade: "50"
+        };
+        function preencher(){
+            registro.codigo=document.getElementById("idCodigo").value
+            registro.nome=document.getElementById("idNome").value
+            registro.idade=document.getElementById("idIdade").value
+        }
+
+        function buscarCodigo() {
+            preencher()
+            fetch(local + "/"+registro.codigo, {
+                method: 'GET',
+                //headers,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("idDiv").innerHTML = ("Listar: " + data.nome);
+                })
+                .catch(error => {
+                    document.getElementById("idDiv").innerHTML = ("Erro ao buscar código:", error);
+                });
+        }
+        function listar() {
+            
+            fetch(local, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    let s ="<br/>"
+                    data.forEach(obj => {
+                        s=s+obj.codigo+" "+obj.nome+" "+obj.idade+"<br/>"
+                    });
+                    document.getElementById("idDiv").innerHTML = ("Listar:<br/> " + s);
+                })
+                .catch(error => {
+                    document.getElementById("idDiv").innerHTML = ("Erro ao listar:", error);
+                });
+        }
+
+
+        function incluir() {
+            preencher()
+            fetch(local, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify(registro),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("idDiv").innerHTML = ("Incluir: " + data);
+                })
+                .catch(error => {
+                    document.getElementById("idDiv").innerHTML = ("Erro ao incluir:", error);
+                });
+        }
+        function remover() {
+            preencher()
+            fetch(local, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify(registro),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("idDiv").innerHTML = ("Remover: " + data);
+                })
+                .catch(error => {
+                    document.getElementById("idDiv").innerHTML = ("Erro ao remover:", error);
+                });
+        }
+
+        function alterar() {
+            preencher()
+            fetch(local, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify(registro),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("idDiv").innerHTML = ("Alterar: " + data);
+                })
+                .catch(error => {
+                    document.getElementById("idDiv").innerHTML = ("Erro ao alterar:", error);
+                });
+        }
+
+    </script>
+</head>
+
+<body>
+    Código:<input type="text" id="idCodigo" /><br/>
+    Nome:<input type="text" id="idNome" /><br/>
+    Idade:<input type="text" id="idIdade" /><br/>
+    <input type="button" name="b4" value="Incluir" onclick="incluir()" />&nbsp; &nbsp;
+    <input type="button" name="b5" value="Alterar" onclick="alterar()" /> &nbsp; &nbsp;
+    <input type="button" name="b6" value="Remover" onclick="remover()" />&nbsp; &nbsp; 
+    <input type="button" name="b7" value="Listar" onclick="listar()" /> &nbsp; &nbsp;
+    <input type="button" name="b7" value="Buscar por código" onclick="buscarCodigo()" />
+
+
+    <div id="idDiv">
+
+    </div>
+</body>
+
+</html>
