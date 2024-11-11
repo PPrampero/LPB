@@ -1,0 +1,6 @@
+Base: WEB2
+create table pessoa(
+código serial primary key,
+nome varchar(100),
+idade int,
+peso float);
