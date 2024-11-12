@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/minha.css')}}" />
+</head>
+
+<body>
+    <p align="center">
+        <font size="15px"> Lista dos Cadastrados</font>
+    </p>
+    <font size="6px">
+        <table border="1" align="center">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Idade</th>
+            </tr>
+            {% for row in data %}
+            <tr>
+                <td align="center">{{ row[0] }}</td>
+                <td width="">{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </font>
+</body>
+
+</html>

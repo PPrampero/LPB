@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/minha.css')}}" />
+</head>
+
+<body>
+    
+    <table align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <img src="{{url_for('static', filename = 'image/RuiDormindo4.jpg')}}" width="200" />
+                </td>
+                <td>
+                    <font size="15px">CRUD em Python/Flask</font>
+                </td>
+                <td>
+                    <img src="{{url_for('static', filename = 'image/RuiOlhando.jpg')}}" width="200" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <form action="/cad" method="post">
+        <p align="center">
+            Código:<input type="text" name="txtCodigo" /> <br />
+            Nome:<input type="text" name="txtNome" /><br />
+            Idade:<input type="text" name="txtIdade" /><br />
+            <input type="submit" name="b1" value="Gravar" />
+            <input type="submit" name="b1" value="Listar" />
+            <input type="submit" name="b1" value="Remover" />
+            <input type="submit" name="b1" value="Alterar" />
+        </p>
+    </form>
+</body>
+
+</html>
